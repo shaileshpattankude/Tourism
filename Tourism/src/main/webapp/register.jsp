@@ -11,16 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap 5.3.0 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        body {
-            background-image: url("images/bgimg1.jpg");
-            background-size: 100% 100%;
-        }
 
         .container {
             width: 450px;
@@ -43,38 +39,33 @@
 <jsp:include page="navbar.jsp" />
 
 <br><br>
-<center>
     <div class="container">
-        <h1><strong><span style="color:#025cff;">Sign Up</span></strong></h1>
+        <h1><center/><strong><span style="color:#025cff;">Sign Up</span></strong></h1>
 
         <!-- ✅ FORM submits to RegisterServlet -->
-        <form method="post" action="RegisterServlet">
-            <table class="table table-bordered">
-                <tbody>
-                <tr>
-                    <th><label>Name</label></th>
-                    <td><input type="text" name="name" placeholder="Enter name" required></td>
-                </tr>
-                
-                <tr>
-                    <th><label>Email</label></th>
-                    <td><input type="email" name="email" placeholder="Enter Email" required></td>
-                </tr>
-                <tr>
-                    <th><label>Password</label></th>
-                    <td><input type="password" name="password" placeholder="Enter password" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
-                            <input type="submit" value="Submit" class="btn btn-primary">
-                            &nbsp;<a href="login.jsp"><span style="color:#111fcd;">Existing User?</span></a>
-                        </center>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
+        
+<form method="post" action="RegisterServlet">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" name="name">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" required="required">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+   &nbsp;<a href="login.jsp"><span style="color:#111fcd;">Existing User?</span></a>
+</form>
+
 
         <!-- ✅ Display status -->
         <%
@@ -90,7 +81,6 @@
             }
         %>
     </div>
-</center>
 
 <footer style="margin-top: 70%;">
     <center>

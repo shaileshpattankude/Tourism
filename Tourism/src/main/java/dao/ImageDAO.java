@@ -18,7 +18,8 @@ public class ImageDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, pass);
-            String query = "SELECT name, path FROM images";  // adjust your table and column names
+            String query = "SELECT name, path FROM images";
+            //String query = "Select name, img1 from places";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

@@ -1,7 +1,5 @@
 <%@page import="java.util.HashMap"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="loadImages.jsp" />
 
 <%
@@ -10,149 +8,102 @@ if (email == null) {
     response.sendRedirect("login.jsp");
     return;
 }
+HashMap<String, String> imagemap = (HashMap<String, String>) session.getAttribute("imagemap");
 %>
-
-<%
-    HashMap<String, String> imagemap = (HashMap<String, String>) session.getAttribute("imagemap");
-%>
-
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="One of the named Tourism website on Kolhapur">
-<meta name="keywords" content="kop,kolhapur">
-<meta name="author"  content="kweb">
-<meta name="viewport"  content="width=device-width,  initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="Tourism website for Kolhapur">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Kolhapur</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+        }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        .place-card:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+        }
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        figcaption {
+            text-align: center;
+            color: #c62828;
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-<link rel="stylesheet" href="css/bootstrap.min.css">
-
-<script src="js/bootstrap.min.js"></script>
-
-<style>
-
-body
-{
-	background-color:;
-	background-image: url("images/bgimg1.jpg");
-	background-size: 100% 100%;
-}
-
-a
-{
-	text-decoration:none;
-	color:#0011ff
-}
-
-figcaption
-{
-	text-decoration:none;
-	color:#d22525;
-	text-align:center;
-	font-weight:bold;
-}
-
-</style>
-
-<link rel="stylesheet" type="text/css" href="custom/cssmenu1.css">
-<link rel="stylesheet" type="text/css" href="customcss/cssmenu3.css">
+        footer {
+            margin-top: 3rem;
+            background: #f8f9fa;
+            padding: 1rem;
+        }
+    </style>
 </head>
 <body>
 
 <header>
-
-<img src="<%= imagemap.get("banner") %>" width="100%" height="200px" />
-
+    <img src="<%= imagemap.get("banner") %>" alt="Banner" width="100%" height="200px" />
 </header>
 
 <jsp:include page="navbar.jsp" />
 
-<br>
+<div class="container py-5">
+    <h2 class="text-center text-dark mb-4">Explore Beautiful Places in Kolhapur</h2>
+    <div class="row g-4">
 
-<div class="container-fluid">
+        <%-- Define each place as an array to reduce repetition --%>
+        <%
+            String[][] places = {
+                {"mahalakshmi", "mandir9", "Mahalakshmi"},
+                {"gaganbawada", "gagan", "Gaganbawda"},
+                {"new palace", "palace3", "New Palace"},
+                {"panhala", "panhala2", "Panhala"},
+                {"rankala", "rankala3", "Rankala Lake"},
+                {"shalini palace", "shalini", "Shalini Palace"},
+                {"kanerimath", "kaneri", "Kaneri Math"},
+                {"sagareshwar deer sanctuary", "sagar", "Sagareshwar Deer Sanctuary"},
+                {"vishalgad", "vishalgad", "Vishal Gad"},
+                {"jyotiba temple", "jyotiba", "Jyotiba Temple"},
+                {"radhanagari dam", "dam", "Radhanagari Dam"},
+                {"radhanagari", "radha2", "Radhanagari Wildlife Sanctuary"}
+            };
 
-<div class="row">
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("mandir9") %>" width="100%" height="320px">
-<figcaption>Mahalakshmi</figcaption></a>
+            for (String[] place : places) {
+                String linkName = place[0];
+                String imageKey = place[1];
+                String displayName = place[2];
+        %>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="card place-card shadow-sm h-100">
+                <a href="place.jsp?name=<%= linkName %>" style="text-decoration: none; color: inherit;">
+                    <img src="<%= imagemap.get(imageKey) %>" class="card-img-top" alt="<%= displayName %>">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><%= displayName %></h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <% } %>
+
+    </div>
 </div>
 
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("gagan") %>" width="100%" height="320px">
-<figcaption>Gaganbawda</figcaption></a>
-</div>
+<footer class="text-center py-4 bg-dark text-white mt-5">
+        &copy; 2025 @shailesh.com <span class="text-danger">All Rights Reserved</span>
+    </footer>
 
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("palace3") %>" width="100%" height="320px">
-<figcaption>New Palace</figcaption></a>
-</div>
-
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("panhala2") %>" width="100%" height="320px">
-<figcaption>Panhala</figcaption></a>
-</div>
-</div>
-
-<div class="row">
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("rankala3") %>" width="100%" height="320px">
-<figcaption>Rankala Lake</figcaption></a>
-</div>
-
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("shalini") %>" width="100%" height="320px">
-<figcaption>Shalini Palace</figcaption></a>
-</div>
-
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("kaneri") %>" width="100%" height="320px">
-<figcaption>Kaneri Math</figcaption></a>
-</div>
-
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("sagar") %>" width="100%" height="320px">
-<figcaption>Sagareshwar Deer Santuary</figcaption></a>
-</div>
-</div>
-
-<div class="row">
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("vishalgad") %>" width="100%" height="320px">
-<figcaption>Vishal Gad</figcaption></a>
-</div>
-
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<a href="jotiba.php"><img src="<%= imagemap.get("jyotiba") %>" width="100%" height="320px">
-<figcaption>Jotiba Temple</figcaption></a>
-</div>
-
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("dam") %>" width="100%" height="320px">
-<figcaption>Radhanagari Dam</figcaption></a>
-</div>
-
-<div class="col-md-3 col-sm-12 col-lg-3 mt-4">
-<img src="<%= imagemap.get("radha2") %>" width="100%" height="320px">
-<figcaption>Radhanagari Wildlife Sanctuary</figcaption></a>
-</div>
-</div>
-</div>
-
-
-
-<footer style="margin-top:2%">
-<center>
-<p>&copy2025@shailesh.com<span style="color:red;">  All Rights Reserved</span> </p>
-</center>
-</footer>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
